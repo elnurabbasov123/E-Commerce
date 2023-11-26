@@ -1,12 +1,12 @@
 package service.impl;
-
+import lombok.RequiredArgsConstructor;
 import model.entity.Cart;
 import repository.impl.ICartRepository;
 import repository.inter.CartRepository;
 import service.inter.CartService;
-
+@RequiredArgsConstructor
 public class ICartService implements CartService {
-    CartRepository cartRepository=new ICartRepository();
+    static CartRepository cartRepository = new ICartRepository();
     @Override
     public int update(Cart cart) {
        return cartRepository.update(cart);

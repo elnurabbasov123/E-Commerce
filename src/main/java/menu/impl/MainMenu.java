@@ -1,21 +1,24 @@
 package menu.impl;
-
-import menu.helper.MenuHelper;
+import lombok.RequiredArgsConstructor;
+import menu.helper.ShowHelper;
 import menu.inter.Menu;
-import model.entity.Admin;
-import model.entity.Customer;
-
-public class MainMenu extends MenuHelper implements Menu {
-
+import service.impl.IAdminService;
+import service.inter.AdminService;
+@RequiredArgsConstructor
+public class MainMenu implements Menu {
+    static ShowHelper showHelper = new ShowHelper();
+    static AdminMenu adminMenu = new AdminMenu();
+    static AdminService adminService = new IAdminService();
+    static CustomerMenu customerMenu = new CustomerMenu();
     @Override
     public void menu() {
-        int option = mainMenuOption();
+        int option = showHelper.mainMenuOption();
         switch (option){
             case 0:
                 System.exit(0);
                 break;
             case 1:
-                isAdmin();
+                adminService.isAdmin();
                 adminMenu.menu();
                break;
             case 2:

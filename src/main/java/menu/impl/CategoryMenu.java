@@ -1,40 +1,46 @@
 package menu.impl;
-import menu.helper.MenuHelper;
+import lombok.RequiredArgsConstructor;
+import menu.helper.FillHelper;
+import menu.helper.ShowHelper;
 import menu.inter.Menu;
 import model.entity.Category;
 import model.enums.Exceptions;
 import model.exception.OperationNotFound;
 import service.impl.ICategoryService;
 import service.inter.CategoryService;
-public class CategoryMenu extends MenuHelper implements Menu {
+@RequiredArgsConstructor
+public class CategoryMenu implements Menu {
     static CategoryService categoryService = new ICategoryService();
+    static FillHelper fillHelper = new FillHelper();
+    static ShowHelper showHelper = new ShowHelper();
+    static AdminMenu adminMenu = new AdminMenu();
 
     @Override
     public void menu() {
         while (true) {
-            int option=categoryMenuOption();
+            int option=showHelper.categoryMenuOption();
             switch (option) {
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    Category category = fillCategory();
+                    Category category = fillHelper.fillCategory();
                     categoryService.save(category);
                     break;
                 case 2:
                     categoryService.getAll().stream().forEach(System.out::println);
                     break;
                 case 3:
-                    findByIdCategory();
+                    categoryService.findById();
                     break;
                 case 4:
-                    findByNameCategory();
+                    categoryService.findByName();
                     break;
                 case 5:
-                    updateCategory();
+                    categoryService.update();
                     break;
                 case 6:
-                    deleteCategory();
+                    categoryService.delete();
                     break;
                 case 7:
                     adminMenu.menu();

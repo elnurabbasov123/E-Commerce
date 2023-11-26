@@ -1,5 +1,7 @@
 package service.impl;
 
+import lombok.RequiredArgsConstructor;
+import menu.helper.FillHelper;
 import model.entity.Brand;
 import model.enums.Exceptions;
 import model.exception.ObjectNotFound;
@@ -7,15 +9,17 @@ import repository.impl.IBrandRepository;
 import repository.inter.BrandRepository;
 import service.inter.BrandService;
 import utility.InputUtil;
-
 import java.util.List;
-import java.util.Optional;
-
+@RequiredArgsConstructor
 public class IBrandService implements BrandService {
-    BrandRepository repository=new IBrandRepository();
+    static BrandRepository repository = new IBrandRepository();
+    static FillHelper fillHelper = new FillHelper();
     @Override
-    public int save(Brand brand) {
-        return repository.save(brand);
+    public int save() {
+        Brand brand = fillHelper.fillBrand();
+        int saveD = repository.save(brand);
+
+        return saveD;
     }
 
     @Override
@@ -24,17 +28,38 @@ public class IBrandService implements BrandService {
     }
 
     @Override
-    public Optional<Brand> findById(long id) {
-        return repository.findById(id);
+    public Brand findById() {
+        int id = InputUtil.getInstance().inputInt("Id:");
+        Brand brand = repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFound(String.valueOf(id), "Brand", Exceptions.OBJECT_NOT_FOUND));
+        System.out.println(brand);
+
+        return brand;
     }
 
     @Override
-    public Optional<Brand> findByName(String name) {
-        return repository.findByName(name);
+    public Brand findByName() {
+        String name = InputUtil.getInstance().inputString("Name:");
+        Brand brand = repository.findByName(name)
+                .orElseThrow(() -> new ObjectNotFound(name, "Brand", Exceptions.OBJECT_NOT_FOUND));
+        System.out.println(brand);
+
+        return brand;
     }
 
     @Override
-    public int update(Brand brand) {
+    public int update() {
+        getAll().stream().forEach(System.out::println);
+        int id = InputUtil.getInstance().inputInt("Id:");
+
+        Brand brand = repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFound(String.valueOf(id), "Brand", Exceptions.OBJECT_NOT_FOUND));
+
+        String name = InputUtil.getInstance().inputString("Enter new Name:");
+        String description = InputUtil.getInstance().inputString("Enter new Description:");
+        brand.setName(name);
+        brand.setDescription(description);
+
         return repository.update(brand);
     }
 
@@ -47,5 +72,10 @@ public class IBrandService implements BrandService {
                 .orElseThrow(() -> new ObjectNotFound(String.valueOf(id), "Brand", Exceptions.OBJECT_NOT_FOUND));
         brand.setStatus(false);
         return repository.update(brand);
+    }
+
+    @Override
+    public void showAll() {
+        repository.getAll().stream().forEach(System.out::println);
     }
 }

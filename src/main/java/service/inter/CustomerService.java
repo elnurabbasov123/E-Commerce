@@ -7,8 +7,11 @@ import java.util.Optional;
 
 public interface CustomerService {
     List<Customer> getAll();
-    int add(Customer customer);
+    Customer register();
     int update(Customer customer);
     Optional<Customer> getById(long id);
     Customer checkCustomer(String login,String password);
+    Customer isCustomer();
+    void increaseBalance(Customer customer);
+    Customer login();
 }

@@ -1,33 +1,40 @@
 package menu.impl;
-import menu.helper.MenuHelper;
+import lombok.RequiredArgsConstructor;
+import menu.helper.ShowHelper;
 import menu.inter.Menu;
 import model.enums.Exceptions;
 import model.exception.OperationNotFound;
-public class ProductMenu extends MenuHelper implements Menu {
+import service.impl.IProductService;
+import service.inter.ProductService;
+@RequiredArgsConstructor
+public class ProductMenu implements Menu {
 
+    static ShowHelper showHelper = new ShowHelper();
+    static ProductService productService = new IProductService();
+    static AdminMenu adminMenu = new AdminMenu();
     @Override
     public void menu() {
         while (true) {
-            int option =productMenuOption();
+            int option =showHelper.productMenuOption();
             switch (option){
                 case 0: System.exit(0); break;
                 case 1:
-                    saveProduct();
+                    productService.save();
                     break;
                 case 2:
-                    showAllProduct();
+                    productService.showAll();
                     break;
                 case 3:
-                    findByIdProduct();
+                    productService.getById();
                     break;
                 case 4:
-                   findByNameProduct();
+                    productService.getByName();
                     break;
                 case 5:
-                    updateProduct();
+                    productService.update();
                     break;
                 case 6:
-                   deleteProduct();
+                    productService.delete();
                     break;
                 case 7:
                     adminMenu.menu();

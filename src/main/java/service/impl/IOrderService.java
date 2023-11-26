@@ -1,14 +1,11 @@
 package service.impl;
-
 import model.entity.*;
 import repository.impl.IOrderRepository;
 import repository.inter.OrderRepository;
 import service.inter.OrderService;
-
 import java.util.List;
-
 public class IOrderService implements OrderService {
-    OrderRepository orderRepository=new IOrderRepository();
+    static OrderRepository orderRepository = new IOrderRepository();
     @Override
     public int add(Order order) {
         return orderRepository.add(order);

@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BrandService {
-    int save(Brand brand);
+    int save();
     List<Brand> getAll();
-    Optional<Brand> findById(long id);
-    Optional<Brand> findByName(String name);
-    int update(Brand brand);
+    Brand findById();
+    Brand findByName();
+    int update();
     int delete();
+    void showAll();
 }

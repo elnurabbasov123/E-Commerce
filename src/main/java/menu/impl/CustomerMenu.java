@@ -1,37 +1,45 @@
 package menu.impl;
-
-import menu.helper.MenuHelper;
+import lombok.RequiredArgsConstructor;
+import menu.helper.ShowHelper;
 import menu.inter.Menu;
 import model.entity.Customer;
 import model.enums.Exceptions;
 import model.exception.OperationNotFound;
-public class CustomerMenu extends MenuHelper implements Menu {
-    MainMenu mainMenu = new MainMenu();
+import service.impl.ICustomerService;
+import service.impl.IProductService;
+import service.inter.CustomerService;
+import service.inter.ProductService;
 
+@RequiredArgsConstructor
+public class CustomerMenu  implements Menu {
+    static MainMenu mainMenu = new MainMenu();
+    static CustomerService customerService = new ICustomerService();
+    static ShowHelper showHelper = new ShowHelper();
+    static ProductService productService = new IProductService();
     @Override
     public void menu() {
-        Customer customer = loginCustomer();
+        Customer customer = customerService.login();
         while (true) {
-            int option = customerMenuOption();
+            int option = showHelper.customerMenuOption();
 
             switch (option) {
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    showAllProduct();
+                    productService.showAll();
                     break;
                 case 2:
-                    addProductToCart(customer);
+                    productService.addToCart(customer);
                     break;
                 case 3:
-                    deleteProductToCart(customer);
+                    productService.deleteFromCart(customer);
                     break;
                 case 4:
-                    buyProduct(customer);
+                    productService.buy(customer);
                     break;
                 case 5:
-                    increaseBalance(customer);
+                    customerService.increaseBalance(customer);
                     break;
                 case 6:
                     mainMenu.menu();

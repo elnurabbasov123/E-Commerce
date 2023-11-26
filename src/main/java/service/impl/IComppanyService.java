@@ -1,15 +1,14 @@
 package service.impl;
 
+import lombok.RequiredArgsConstructor;
 import model.entity.Company;
 import repository.impl.ICompanyRepository;
 import repository.inter.CompanyRepository;
 import service.inter.CompanyService;
-
-import java.util.List;
 import java.util.Optional;
-
+@RequiredArgsConstructor
 public class IComppanyService implements CompanyService {
-    CompanyRepository repo=new ICompanyRepository();
+    static CompanyRepository repo = new ICompanyRepository();
     @Override
     public int update(Company company) {
         return repo.update(company);

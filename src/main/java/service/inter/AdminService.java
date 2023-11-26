@@ -9,4 +9,5 @@ public interface AdminService {
     Optional<Admin> getById(long id);
     List<Admin> getAll();
     int add(Admin admin);
+    Admin isAdmin();
 }
