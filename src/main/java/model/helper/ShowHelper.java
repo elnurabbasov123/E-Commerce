@@ -1,4 +1,4 @@
-package menu.helper;
+package model.helper;
 
 import utility.InputUtil;
 
@@ -64,7 +64,6 @@ public class ShowHelper {
                 "[6] - > Back\n" +
                 "Select:");
     }
-
 
     //------------------------MAIN MENU -----------------
 

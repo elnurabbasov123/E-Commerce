@@ -1,4 +1,4 @@
-package menu.helper;
+package model.helper;
 
 import lombok.RequiredArgsConstructor;
 import model.entity.*;

@@ -1,6 +1,6 @@
 package menu.impl;
 import lombok.RequiredArgsConstructor;
-import menu.helper.ShowHelper;
+import model.helper.ShowHelper;
 import menu.inter.Menu;
 import model.enums.Exceptions;
 import model.exception.OperationNotFound;

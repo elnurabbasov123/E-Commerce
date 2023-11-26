@@ -1,7 +1,7 @@
 package menu.impl;
 import lombok.RequiredArgsConstructor;
-import menu.helper.FillHelper;
-import menu.helper.ShowHelper;
+import model.helper.FillHelper;
+import model.helper.ShowHelper;
 import menu.inter.Menu;
 import model.entity.Category;
 import model.enums.Exceptions;
